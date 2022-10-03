@@ -1,0 +1,39 @@
+{
+  "project_info": {
+    "project_number": "270386695689",
+    "project_id": "xpert-fms-contractor",
+    "storage_bucket": "xpert-fms-contractor.appspot.com"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:270386695689:android:9d5da81abeb2d7e4b532d8",
+        "android_client_info": {
+          "package_name": "com.xpert_fms"
+        }
+      },
+      "oauth_client": [
+        {
+          "client_id": "270386695689-405qtmvk4401k8jek2l3flag63ig5mcc.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
+      "api_key": [
+        {
+          "current_key": "AIzaSyCoScIHCWu-tv0KPAeSFjDD1RqXDfS2p5w"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": [
+            {
+              "client_id": "270386695689-405qtmvk4401k8jek2l3flag63ig5mcc.apps.googleusercontent.com",
+              "client_type": 3
+            }
+          ]
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}
