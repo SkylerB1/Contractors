@@ -1,7 +1,8 @@
 import { Pressable, StyleSheet, Text, TouchableOpacity, View} from 'react-native';
-import React, {useState} from 'react';
+import React, {useCallback, useState} from 'react';
 import {heightToDp, widthToDp} from '../Responsive';
 import { useNavigation } from '@react-navigation/native';
+import { getTimeStamp } from '../TimeStamp/getTimeStamp';
 const List = ({
   type,
   status,
@@ -12,8 +13,30 @@ const List = ({
   notes,
   added_date,
   due_date,
+  defectedImages
 }) => {
   const navigation = useNavigation();
+
+  const getStatus = useCallback(
+    status => {
+      if (status === 0) {
+        return 'New';
+      } else if (status === 1) {
+        return 'In-Progress';
+      } else if (status === 3) {
+        return 'Deleted';
+      } else if (status === 4) {
+        return 'Rejected';
+      } else if (status === 5) {
+        return 'ToBEMonitored';
+      } else if (status === 2) {
+        return 'Completed';
+      } else {
+        return '';
+      }
+    },
+    [status],
+  );
   return (
     <Pressable
       onPress={() =>
@@ -26,7 +49,8 @@ const List = ({
           added_date: added_date,
           due_date: due_date,
           subject: type,
-          description:description
+          defectedImages:defectedImages,
+          description: description,
         })
       }
       style={styles.container}>
@@ -34,7 +58,7 @@ const List = ({
         <Text style={styles.MainTxt}>
           #{caseNo} - {type}
         </Text>
-        <Text style={{fontFamily: 'OpenSans'}}>6 days ago</Text>
+        {/* <Text style={{fontFamily: 'OpenSans'}}>{getTimeStamp(added_date)} ago</Text> */}
       </View>
       <View style={{flexDirection: 'row'}}>
         <Text numberOfLines={1} style={styles.descText}>
@@ -44,17 +68,20 @@ const List = ({
       <View
         style={[
           styles.statusView,
-          {backgroundColor: status == 0 ? 'yellow' : 'green'},
+          {
+            backgroundColor:
+              status == 3 ? 'red' : status == 2 ? 'green' : 'yellow',
+          },
         ]}>
         <Text
           style={[
             styles.statusText,
             {
-              color: status == 0 ? 'black' : 'white',
+              color: status == 3 || status == 2 ? 'white' : 'black',
               flexDirection: 'row',
             },
           ]}>
-          {status == 0 ? 'Pending' : 'Completed'}
+          {getStatus(status)}
         </Text>
       </View>
     </Pressable>
@@ -89,6 +116,7 @@ const styles = StyleSheet.create({
   },
   statusText: {
     fontSize: widthToDp(3.2),
+    fontWeight:'bold',
     padding: widthToDp(2),
     letterSpacing: 0.2,
     fontFamily: 'OpenSans',

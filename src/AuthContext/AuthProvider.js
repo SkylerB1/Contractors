@@ -30,14 +30,15 @@ const AuthProvider = ({children}) => {
     const response = await postRequest(url, data);
 
     if (response.status == 200) {
+      // console.log(response.data)
       setUserData(response.data);
       setToken(response.token)      
-      await AsyncStorage.setItem('userToken', response.token);
+      // await AsyncStorage.setItem('userToken', response.token);
       setLoading(false);
     } else if (response.status == 400) {
       Alert.alert(
-        'Wrong Password',
-        'If you forget your password, please contact the owner.',
+        'Wrong Credentials!',
+        response.data.message,
       );
       setLoading(false);
     } else if (response.status == 500) {
@@ -58,29 +59,29 @@ const AuthProvider = ({children}) => {
   const signOut = async () => {
     setUserData(null);
     setToken(null)
-    await AsyncStorage.clear()
+    // await AsyncStorage.clear()
   };
 
-  const isLoggedIn = async () => {
-    setLoading(true)
-    try {
-      let userToken = await AsyncStorage.getItem('userToken');
-      setToken(userToken)
-      setLoading(false)
-    } catch (e) {
-      // console.log(e)
-      setLoading(false)
-      setToken(null)
-    }
-  }
+  // const isLoggedIn = async () => {
+  //   setLoading(true)
+  //   try {
+  //     let userToken = await AsyncStorage.getItem('userToken');
+  //     setToken(userToken)
+  //     setLoading(false)
+  //   } catch (e) {
+  //     // console.log(e)
+  //     setLoading(false)
+  //     setToken(null)
+  //   }
+  // }
 
-  useEffect(() => {
-    isLoggedIn()
-  }, [])
+  // useEffect(() => {
+  //   isLoggedIn()
+  // }, [])
   
-  useEffect(() => {
-    console.log(userData)
-  },[userData])
+  // useEffect(() => {
+  //   console.log(userData)
+  // },[userData])
 
   return (
     <AuthContext.Provider value={{userData, loading, signIn, signOut,token}}>

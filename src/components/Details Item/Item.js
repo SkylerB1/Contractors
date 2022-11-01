@@ -3,14 +3,18 @@ import React, {useState, useMemo} from 'react';
 import {widthToDp} from '../Responsive';
 import DropDownPicker from 'react-native-dropdown-picker';
 
-const Item = ({heading, details, dropdown, input, dropDown,setDropDown}) => {
-  const [value, setValue] = useState('');
+const Item = ({
+  heading,
+  details,
+  dropdown,
+  input,
+  workStatus,
+  setWorkStatus,
+  dropDown,
+  setDropDown,
+}) => {
   const items = useMemo(() => {
     return [
-      {
-        label: 'Yet to start',
-        value: 0,
-      },
       {
         label: 'In-Progress',
         value: 1,
@@ -33,13 +37,13 @@ const Item = ({heading, details, dropdown, input, dropDown,setDropDown}) => {
           <DropDownPicker
             open={dropDown}
             dropDownDirection={'TOP'}
-            value={value}
+            value={workStatus}
             items={items}
             placeholder="Select status"
             setOpen={setDropDown}
             listMode="SCROLLVIEW"
-            setValue={setValue}
-            onChangeValue={value => setValue(value)}
+            setValue={setWorkStatus}
+            onChangeValue={value => setWorkStatus(value)}
             style={styles.dropDown}
             dropDownContainerStyle={styles.dropDownContainerStyle}
             closeOnBackPressed

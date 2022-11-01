@@ -33,7 +33,7 @@ const SignIn = () => {
     <>
       {/* <ImageBackground style={{aspectRatio:1}} imageStyle={{width:width,height:height}} source={require('../../../assets/images/Building.jpg')}> */}
       <View style={styles.root}>
-        <Text style={styles.text}>Sign In</Text>
+        <Text style={styles.text}>Contractor's Login</Text>
         <KeyboardAvoidingView
           behavior="position"
           keyboardVerticalOffset={widthToDp(20)}>

@@ -13,9 +13,9 @@ import List from '../components/List/List';
 import {API_URL} from '@env';
 import {createMaterialTopTabNavigator} from '@react-navigation/material-top-tabs';
 import {postRequest} from '../components/API_Request/Api_Request';
-import AsyncStorage from '@react-native-async-storage/async-storage';
 import {widthPercentageToDP} from 'react-native-responsive-screen';
 import {AuthContext} from '../AuthContext/AuthProvider';
+import { useIsFocused } from '@react-navigation/native';
 
 const Tab = createMaterialTopTabNavigator();
 
@@ -25,6 +25,7 @@ const Cases = () => {
   const [pendingCases, setPendingCases] = useState([]);
   const [completedCases, setCompletedCases] = useState([]);
   const [loading, setLoading] = useState(false);
+  const isFocused = useIsFocused()
 
   const {userData} = useContext(AuthContext);
 
@@ -42,7 +43,7 @@ const Cases = () => {
       let pendingItems = [];
       let completedItems = [];
       response.data.map(item => {
-        if (item.case_status != 'Completed') {
+        if (item.case_status != 2) {
           pendingItems.push(item);
         } else {
           completedItems.push(item);
@@ -56,14 +57,14 @@ const Cases = () => {
 
   useEffect(() => {
     getCases();
-  }, [userData]);
+  }, [userData,isFocused]);
 
   // useEffect(() => {
-  //   console.log(pendingCases);
+  //   console.log('Pending Cases',pendingCases);
   // }, [pendingCases]);
 
   // useEffect(() => {
-  //   console.log(completedCases);
+  //   console.log('Completed Cases',completedCases);
   // }, [completedCases]);
 
   const PendingCases = () => {
@@ -77,7 +78,6 @@ const Cases = () => {
           <Text style={styles.noCasesText}>No cases to show</Text>
         ) : (
           pendingCases.map((item, index) => {
-            if (item.case_status != 'Completed') {
               return (
                 <List
                   key={index}
@@ -89,10 +89,11 @@ const Cases = () => {
                   notes={item.notes}
                   added_date={item.added_date}
                   due_date={item.due_date}
-                  status={0}
+                  status={item.case_status}
+                  defectedImages={JSON.parse(item.defected_images)}
                 />
               );
-            }
+            
           })
         )}
         {/* {Cases.length == 0 && <Text>No case to show.</Text>} */}
@@ -110,11 +111,10 @@ const Cases = () => {
           <Text style={styles.noCasesText}>No cases to show.</Text>
         ) : (
           completedCases.map((item, index) => {
-            if (item.case_status == 'Completed') {
               return (
                 <List
                   key={index}
-                  type={item.subject}
+                  type={item.title}
                   caseNo={item.case_number}
                   description={item.description}
                   apartment_no={item.apartment_no}
@@ -122,10 +122,10 @@ const Cases = () => {
                   notes={item.notes}
                   added_date={item.added_date}
                   due_date={item.due_date}
-                  status={1}
+                  status={item.case_status}
                 />
               );
-            }
+            
           })
         )}
       </ScrollView>
