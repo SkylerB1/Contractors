@@ -41,7 +41,7 @@ const Home = () => {
     <View style={styles.root}>
       <StatusBar translucent barStyle={'light-content'} />
       <View style={styles.backgroundView}>
-        <View style={styles.topView}>
+        {/* <View style={styles.topView}>
           <Menu width={widthToDp(6)} height={heightToDp(6)} fill="white" />
 
           <View style={styles.imgBorder}>
@@ -50,10 +50,10 @@ const Home = () => {
               source={require('../../assets/images/chatprofile.png')}
             />
           </View>
-        </View>
+        </View> */}
         <View style={styles.MainTextView}>
           <Text style={styles.welcomeText}>Welcome to</Text>
-          <Text style={styles.buildingNameText}>FMS XPERT</Text>
+          <Text style={styles.buildingNameText}>XPERT FMS</Text>
         </View>
         <View style={styles.weatherView}>
           <Weather width={widthToDp(15)} height={heightToDp(15)} fill="white" />
@@ -140,7 +140,7 @@ const styles = StyleSheet.create({
     justifyContent: 'center',
     alignItems: 'center',
   },
-  MainTextView: {marginLeft: widthToDp(3), marginTop: '10%'},
+  MainTextView: {marginLeft: widthToDp(3), marginTop: '40%'},
   welcomeText: {
     color: 'white',
     fontSize: widthToDp(3.5),

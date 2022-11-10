@@ -7,11 +7,9 @@ const Notifications = () => {
   return (
     <SafeAreaView style={styles.root}>
       <Header text="Notifications" />
-      <Notification name="Vikas Kumar" caseNo="101" text="has assigned you" />
-      <Notification name="Vikas Kumar" caseNo="102" text="has marked completed" />
-      <Notification name="Vikas Kumar" caseNo="103" text="has assigned you" />
-      <Notification name="Vikas Kumar" caseNo="104" text="has assigned you" />
-      <Notification name="Vikas Kumar" caseNo="105" text="has assigned you" />
+      <View style={{flex:1,flexDirection:'row',justifyContent:'center',alignItems:'center'}}>
+        <Text>This screen is under development!</Text>
+      </View>
     </SafeAreaView>
   );
 }

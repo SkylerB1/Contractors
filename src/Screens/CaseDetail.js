@@ -53,6 +53,7 @@ const CaseDetail = ({route, navigation}) => {
         status: workStatus,
         caseId: caseNo,
       };
+      console.log(data)
 
       const response = await postRequest(updateStatusUrl, data);
       if (response.status == 200) {
@@ -69,6 +70,7 @@ const CaseDetail = ({route, navigation}) => {
           ],
         );
       } else {
+        console.log(response)
         setLoading(false);
         Alert.alert(
           'Oops!',
@@ -135,7 +137,7 @@ const CaseDetail = ({route, navigation}) => {
           <Item heading="Added" details={added_date} />
           <Item heading="Due" details={due_date ? due_date : 'null'} />
           <Item heading="Status" details={getStatus(status)} />
-          <View>
+          {showRemarks(status) && <View>
             <Text style={styles.heading}>Defect's Images</Text>
             <View style={styles.line} />
             <View
@@ -145,14 +147,14 @@ const CaseDetail = ({route, navigation}) => {
                 marginTop: '3%',
               }}>
               {/* <Image style={{width:widthPercentageToDP('20%'),height:heightPercentageToDP('15%'),borderRadius:5}} source={{uri:'http://54.79.105.63/xpert-fms/public/cases/' + defectedImages[0].name}} /> */}
-              {defectedImages.map((item, index) => {
+              {defectedImages?.map((item, index) => {
                 return (
                   <View key={index} style={{marginHorizontal: '2%'}}>
                     <ImageModal
                       resizeMode="contain"
                       imageBackgroundColor="black"
                       style={{
-                        width: widthPercentageToDP('20%'),
+                        width: widthPercentageToDP('50%'),
                         height: undefined,
                         aspectRatio:1,
                         borderRadius: 5,
@@ -168,10 +170,8 @@ const CaseDetail = ({route, navigation}) => {
                 );
               })}
             </View>
-          </View>
-          {/* {status == 1 && (
-            <Item heading="Feedback" details="Satisfied with the work" />
-          )} */}
+          </View>}
+          
           {showRemarks(status) && (
             <>
               <Text style={styles.heading}>Update work status</Text>
