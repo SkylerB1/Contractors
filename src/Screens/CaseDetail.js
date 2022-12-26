@@ -137,7 +137,7 @@ const CaseDetail = ({route, navigation}) => {
           <Item heading="Added" details={added_date} />
           <Item heading="Due" details={due_date ? due_date : 'null'} />
           <Item heading="Status" details={getStatus(status)} />
-          {showRemarks(status) && <View>
+          {showRemarks(status) && defectedImages?.length> 0 && <View>
             <Text style={styles.heading}>Defect's Images</Text>
             <View style={styles.line} />
             <View
@@ -156,13 +156,13 @@ const CaseDetail = ({route, navigation}) => {
                       style={{
                         width: widthPercentageToDP('50%'),
                         height: undefined,
-                        aspectRatio:1,
+                        aspectRatio: 1,
                         borderRadius: 5,
                       }}
                       isTranslucent={true}
                       source={{
                         uri:
-                          'http://54.79.105.63/xpert-fms/public/cases/' +
+                          'https://myboss.appwrk.com/public/cases/' +
                           item.name,
                       }}
                     />
